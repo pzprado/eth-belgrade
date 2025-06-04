@@ -11,6 +11,8 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { useState } from 'react';
 import { protectSurveyData } from '@/lib/iexec';
+import { User } from '@civic/auth';
+import { Calendar, ShieldCheck, Clock } from 'lucide-react';
 
 interface SurveyData {
   workload: number | null;
@@ -19,7 +21,7 @@ interface SurveyData {
   comments: string;
 }
 
-export function EmployeeSurveyContent() {
+export function EmployeeSurveyContent({ user }: { user: User }) {
   const [formData, setFormData] = useState<SurveyData>({
     workload: null,
     managerSupport: null,
@@ -87,16 +89,18 @@ export function EmployeeSurveyContent() {
     field: keyof SurveyData,
     selectedValue: number | null
   ) => (
-    <div className='flex gap-4'>
-      {[1, 2, 3, 4, 5].map((rating) => (
+    <div className='flex gap-2 flex-wrap'>
+      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((rating) => (
         <Button
           key={rating}
           variant={selectedValue === rating ? 'default' : 'outline'}
-          className={`flex-1 ${
-            selectedValue === rating
-              ? ''
-              : 'hover:bg-primary hover:text-primary-foreground'
-          } ${errors[field] ? 'border-destructive' : ''}`}
+          className={`w-10 h-10 p-0 rounded-md text-base font-semibold
+            ${
+              selectedValue === rating
+                ? 'bg-blue-600 text-white'
+                : 'bg-blue-100 text-blue-700 border-blue-200'
+            }
+            ${errors[field] ? 'border-destructive' : ''}`}
           onClick={() => handleRatingClick(field, rating)}
           type='button'
         >
@@ -106,81 +110,121 @@ export function EmployeeSurveyContent() {
     </div>
   );
 
+  const firstName =
+    user.name?.split(' ')[0] || user.email?.split('@')[0] || 'Employee';
+
   return (
-    <Card className='w-full max-w-2xl'>
-      <CardHeader>
-        <CardTitle>Employee Pulse Survey</CardTitle>
-        <CardDescription>
-          Your responses are encrypted and anonymous. Be honest and help us
-          improve.
-        </CardDescription>
-      </CardHeader>
-      <CardContent className='flex flex-col gap-6'>
-        {success && (
-          <div className='rounded bg-green-100 text-green-800 px-4 py-2 mb-2'>
-            Survey submitted successfully!
+    <div className='w-full max-w-2xl flex flex-col gap-6'>
+      {/* Top intro card */}
+      <Card className='mb-2'>
+        <CardContent className='py-6'>
+          <div className='flex items-center justify-between mb-2'>
+            <div className='flex flex-col gap-1'>
+              <span className='text-lg font-bold'>
+                Employee Satisfaction Survey
+              </span>
+              <span className='text-slate-600 text-sm'>
+                Your feedback helps us create a better workplace. This survey is
+                encrypted, anonymous and takes about 5 minutes to complete.
+              </span>
+            </div>
+            <span className='bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full'>
+              Active
+            </span>
           </div>
-        )}
-        {errorMsg && (
-          <div className='rounded bg-red-100 text-red-800 px-4 py-2 mb-2'>
-            {errorMsg}
+          <div className='flex items-center gap-6 mt-3'>
+            <span className='flex items-center gap-1 text-slate-500 text-sm'>
+              <Clock className='w-4 h-4' /> 5 minutes
+            </span>
+            <span className='flex items-center gap-1 text-slate-500 text-sm'>
+              <ShieldCheck className='w-4 h-4' /> 100% Anonymous
+            </span>
+            <span className='flex items-center gap-1 text-slate-500 text-sm'>
+              <Calendar className='w-4 h-4' /> Due:{' '}
+              {new Date(
+                new Date().setDate(new Date().getDate() + 7)
+              ).toLocaleDateString('en-US', {
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric',
+              })}
+            </span>
           </div>
-        )}
-        <div className='space-y-2'>
-          <label className='text-sm font-medium'>
-            How manageable is your current workload?
-            <span className='text-destructive'>*</span>
-          </label>
-          {renderRatingButtons('workload', formData.workload)}
-          {errors.workload && (
-            <p className='text-sm text-destructive'>Please select a rating</p>
+        </CardContent>
+      </Card>
+
+      {/* Survey questions card */}
+      <Card>
+        <CardHeader>
+          {/* Removed CardTitle and CardDescription to avoid redundancy */}
+        </CardHeader>
+        <CardContent className='flex flex-col gap-6'>
+          <div className='space-y-2'>
+            <label className='text-sm font-medium'>
+              How manageable is your current workload?
+              <span className='text-destructive'>*</span>
+            </label>
+            {renderRatingButtons('workload', formData.workload)}
+            {errors.workload && (
+              <p className='text-sm text-destructive'>Please select a rating</p>
+            )}
+          </div>
+
+          <div className='space-y-2'>
+            <label className='text-sm font-medium'>
+              How supported do you feel by your direct manager?
+              <span className='text-destructive'>*</span>
+            </label>
+            {renderRatingButtons('managerSupport', formData.managerSupport)}
+            {errors.managerSupport && (
+              <p className='text-sm text-destructive'>Please select a rating</p>
+            )}
+          </div>
+
+          <div className='space-y-2'>
+            <label className='text-sm font-medium'>
+              How well do you feel aligned with the company&apos;s goals?
+              <span className='text-destructive'>*</span>
+            </label>
+            {renderRatingButtons('companyAlignment', formData.companyAlignment)}
+            {errors.companyAlignment && (
+              <p className='text-sm text-destructive'>Please select a rating</p>
+            )}
+          </div>
+
+          <div className='space-y-2'>
+            <label className='text-sm font-medium'>
+              Any additional comments or suggestions?
+            </label>
+            <Textarea
+              placeholder='Share your thoughts...'
+              className='min-h-[100px]'
+              value={formData.comments}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, comments: e.target.value }))
+              }
+            />
+          </div>
+
+          <Button
+            className='w-full mt-2'
+            onClick={handleSubmit}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Submitting...' : 'Submit Survey'}
+          </Button>
+          {success && (
+            <div className='rounded bg-green-100 text-green-800 px-4 py-2 mt-2'>
+              Survey submitted successfully!
+            </div>
           )}
-        </div>
-
-        <div className='space-y-2'>
-          <label className='text-sm font-medium'>
-            How supported do you feel by your direct manager?
-            <span className='text-destructive'>*</span>
-          </label>
-          {renderRatingButtons('managerSupport', formData.managerSupport)}
-          {errors.managerSupport && (
-            <p className='text-sm text-destructive'>Please select a rating</p>
+          {errorMsg && (
+            <div className='rounded bg-red-100 text-red-800 px-4 py-2 mt-2'>
+              {errorMsg}
+            </div>
           )}
-        </div>
-
-        <div className='space-y-2'>
-          <label className='text-sm font-medium'>
-            How well do you feel aligned with the company&apos;s goals?
-            <span className='text-destructive'>*</span>
-          </label>
-          {renderRatingButtons('companyAlignment', formData.companyAlignment)}
-          {errors.companyAlignment && (
-            <p className='text-sm text-destructive'>Please select a rating</p>
-          )}
-        </div>
-
-        <div className='space-y-2'>
-          <label className='text-sm font-medium'>
-            Any additional comments or suggestions?
-          </label>
-          <Textarea
-            placeholder='Share your thoughts...'
-            className='min-h-[100px]'
-            value={formData.comments}
-            onChange={(e) =>
-              setFormData((prev) => ({ ...prev, comments: e.target.value }))
-            }
-          />
-        </div>
-
-        <Button
-          className='w-full'
-          onClick={handleSubmit}
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? 'Submitting...' : 'Submit Survey'}
-        </Button>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

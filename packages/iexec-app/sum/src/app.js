@@ -110,10 +110,7 @@ async function main() {
     path.join(outDir, 'computed.json'),
     JSON.stringify(report, null, 2)
   );
-  console.log(
-    'Aggregated report written to',
-    path.join(outDir, 'computed.json')
-  );
+  console.log(JSON.stringify(report));
 }
 
 main();
