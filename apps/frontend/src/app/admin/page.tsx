@@ -15,7 +15,7 @@ interface SurveyRecord {
   timestamp: string;
 }
 
-const SURVEY_PROJECT_ID = 'demo_project'; // TODO: Replace with dynamic selection if needed
+const SURVEY_PROJECT_ID = 'demo_project'; // Hardcoded for hackathon scope
 
 export default function AdminPage() {
   const [surveyData, setSurveyData] = useState<SurveyRecord[]>([]);
@@ -55,7 +55,6 @@ export default function AdminPage() {
       const addresses = surveyData.map((rec) => rec.protectedDataAddress);
       if (addresses.length === 0)
         throw new Error('No survey data to aggregate');
-      // For demo, process only the first address (can be extended to batch)
       const results = await processProtectedData({
         protectedDataAddresses: addresses,
         surveyProjectId: SURVEY_PROJECT_ID,
@@ -63,7 +62,6 @@ export default function AdminPage() {
       if (!results.length) throw new Error('No iExec task started');
       const { taskId } = results[0];
       setAggStatus('fetching');
-      // Poll for result
       let report: AggregationReport | null = null;
       let attempts = 0;
       while (attempts < 20) {

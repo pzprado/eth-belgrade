@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { EmployeeSurveyContent } from './employee/EmployeeSurveyContent';
 import { User } from '@civic/auth';
 import { UserCircle2 } from 'lucide-react';
+import AdminPage from './admin/page';
 
 function NavigationBar({
   user,
@@ -69,26 +70,13 @@ export default function Home() {
     );
   }
 
-  // If user clicks admin icon, show admin/project management UI (placeholder for now)
+  // If user clicks admin icon, show admin/project management UI
   if (showAdmin) {
     return (
       <div className='flex flex-col min-h-screen bg-slate-50'>
         <NavigationBar user={user} onAdminClick={() => setShowAdmin(false)} />
         <main className='flex flex-col items-center justify-center flex-1'>
-          <Card className='w-full max-w-2xl mt-8'>
-            <CardHeader>
-              <CardTitle>Project Admin (Coming Soon)</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className='text-muted-foreground'>
-                Here you will be able to create and manage survey projects, and
-                trigger surveys to be sent on a schedule.
-              </p>
-              <Button className='mt-4' onClick={() => setShowAdmin(false)}>
-                Back to Employee View
-              </Button>
-            </CardContent>
-          </Card>
+          <AdminPage />
         </main>
       </div>
     );
