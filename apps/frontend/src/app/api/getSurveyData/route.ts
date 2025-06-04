@@ -1,8 +1,16 @@
 import { NextResponse } from 'next/server';
 
+interface SurveyResponse {
+  protectedDataAddress: string;
+  owner: string;
+  surveyProjectId: string;
+  submissionTimestampClient?: string;
+  apiReceivedTimestamp?: string;
+}
+
 // This would normally be imported from a shared location
 // but for demo we're keeping it simple
-let surveyResponses: any[] = [];
+const surveyResponses: SurveyResponse[] = [];
 
 export async function GET() {
   try {

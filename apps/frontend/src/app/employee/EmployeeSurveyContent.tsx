@@ -26,9 +26,9 @@ export function EmployeeSurveyContent() {
     companyAlignment: null,
     comments: '',
   });
-  const [errors, setErrors] = useState<{ [K in keyof SurveyData]?: boolean }>(
-    {}
-  );
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof SurveyData, boolean>>
+  >({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -39,7 +39,7 @@ export function EmployeeSurveyContent() {
   };
 
   const validateForm = (): boolean => {
-    const newErrors: { [K in keyof SurveyData]?: boolean } = {};
+    const newErrors: Partial<Record<keyof SurveyData, boolean>> = {};
     if (formData.workload === null) newErrors.workload = true;
     if (formData.managerSupport === null) newErrors.managerSupport = true;
     if (formData.companyAlignment === null) newErrors.companyAlignment = true;
@@ -72,9 +72,11 @@ export function EmployeeSurveyContent() {
         companyAlignment: null,
         comments: '',
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       setErrorMsg(
-        error.message || 'Error submitting survey. Please try again.'
+        error instanceof Error
+          ? error.message
+          : 'Error submitting survey. Please try again.'
       );
     } finally {
       setIsSubmitting(false);
@@ -148,7 +150,7 @@ export function EmployeeSurveyContent() {
 
         <div className='space-y-2'>
           <label className='text-sm font-medium'>
-            How well do you feel aligned with the company's goals?
+            How well do you feel aligned with the company&apos;s goals?
             <span className='text-destructive'>*</span>
           </label>
           {renderRatingButtons('companyAlignment', formData.companyAlignment)}

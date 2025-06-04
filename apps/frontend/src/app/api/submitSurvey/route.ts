@@ -1,8 +1,17 @@
 import { NextResponse } from 'next/server';
 
+interface SurveyResponse {
+  protectedDataAddress: string;
+  owner: string;
+  surveyProjectId?: string;
+  submissionTimestampClient?: string;
+  apiReceivedTimestamp?: string;
+  timestamp?: string;
+}
+
 // Temporary in-memory storage for demo purposes
 // In production, this would be a proper database
-let surveyResponses: any[] = [];
+const surveyResponses: SurveyResponse[] = [];
 
 export async function POST(request: Request) {
   try {
@@ -20,6 +29,9 @@ export async function POST(request: Request) {
     surveyResponses.push({
       protectedDataAddress: body.protectedDataAddress,
       owner: body.owner,
+      surveyProjectId: body.surveyProjectId,
+      submissionTimestampClient: body.submissionTimestampClient,
+      apiReceivedTimestamp: new Date().toISOString(),
       timestamp: new Date().toISOString(),
     });
 

@@ -3,8 +3,6 @@
 import { UserButton, useUser } from '@civic/auth/react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { EmployeeSurveyContent } from './employee/EmployeeSurveyContent';
 import { User } from '@civic/auth';
@@ -44,7 +42,6 @@ function NavigationBar({
 export default function Home() {
   const { user, isLoading } = useUser();
   const [showAdmin, setShowAdmin] = useState(false);
-  const router = useRouter();
 
   if (isLoading) {
     return (
