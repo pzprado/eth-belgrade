@@ -1,0 +1,53 @@
+[
+    {
+        "surveyId": "pulse_2025-06-04",
+        "responses": {
+            "q1_workload": {
+                "answerValue": 4
+            },
+            "q2_manager_support": {
+                "answerValue": 5
+            },
+            "q3_company_alignment": {
+                "answerValue": 3
+            },
+            "q4_open_comment": {
+                "answerValue": "Great place to work!"
+            }
+        }
+    },
+    {
+        "surveyId": "pulse_2025-06-04",
+        "responses": {
+            "q1_workload": {
+                "answerValue": 3
+            },
+            "q2_manager_support": {
+                "answerValue": 4
+            },
+            "q3_company_alignment": {
+                "answerValue": 4
+            },
+            "q4_open_comment": {
+                "answerValue": "Could use more team events."
+            }
+        }
+    },
+    {
+        "surveyId": "pulse_2025-06-04",
+        "responses": {
+            "q1_workload": {
+                "answerValue": 5
+            },
+            "q2_manager_support": {
+                "answerValue": 4
+            },
+            "q3_company_alignment": {
+                "answerValue": 5
+            },
+            "q4_open_comment": {
+                "answerValue": "Love the mission!"
+            }
+        }
+    }
+]

@@ -78,4 +78,49 @@ export async function protectSurveyData(surveyData: any) {
     console.error('Error protecting survey data:', error);
     throw error;
   }
+}
+
+// Admin: Trigger aggregation on iExec
+type AggregationResult = {
+  taskId: string;
+};
+
+export async function processProtectedData({
+  protectedDataAddresses,
+  surveyProjectId,
+  iAppAddress = IEXEC_APP_ADDRESS,
+}: {
+  protectedDataAddresses: string[];
+  surveyProjectId: string;
+  iAppAddress?: string;
+}): Promise<AggregationResult[]> {
+  if (typeof window === 'undefined' || !window.ethereum) {
+    throw new Error('No Ethereum provider found. Please connect your wallet.');
+  }
+  const dataProtector = new IExecDataProtectorCore(window.ethereum);
+  const results: AggregationResult[] = [];
+  for (const address of protectedDataAddresses) {
+    // Each call processes one protected data object; for batch, see SDK docs
+    const res = await dataProtector.processProtectedData({
+      protectedData: address,
+      appAddress: iAppAddress,
+      args: surveyProjectId,
+    });
+    results.push({ taskId: res.taskId });
+  }
+  return results;
+}
+
+// Admin: Fetch aggregation result from iExec
+type AggregationReport = any; // Use a proper type if desired
+export async function getResultFromCompletedTask(taskId: string): Promise<AggregationReport> {
+  if (typeof window === 'undefined' || !window.ethereum) {
+    throw new Error('No Ethereum provider found. Please connect your wallet.');
+  }
+  const dataProtector = new IExecDataProtectorCore(window.ethereum);
+  const result = await dataProtector.getResultFromCompletedTask({ taskId });
+  // result.result is a link to the computed.json file
+  const response = await fetch(result.result);
+  if (!response.ok) throw new Error('Failed to fetch aggregation result');
+  return await response.json();
 } 
