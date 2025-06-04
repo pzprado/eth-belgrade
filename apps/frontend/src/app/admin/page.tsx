@@ -57,7 +57,6 @@ export default function AdminPage() {
         throw new Error('No survey data to aggregate');
       const results = await processProtectedData({
         protectedDataAddresses: addresses,
-        surveyProjectId: SURVEY_PROJECT_ID,
       });
       if (!results.length) throw new Error('No iExec task started');
       const { taskId } = results[0];
