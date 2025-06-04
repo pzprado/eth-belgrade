@@ -19,12 +19,14 @@ export interface ProtectedSurveyData {
   owner: string;
 }
 
-export async function protectSurveyData(surveyData: {
-  workload: number | null;
-  managerSupport: number | null;
-  companyAlignment: number | null;
-  comments: string;
-}): Promise<ProtectedSurveyData> {
+// New type for survey submission
+export interface SurveySubmission {
+  responses: Array<{ questionId: string; answerValue: number | string | null }>;
+}
+
+export async function protectSurveyData(
+  surveyData: SurveySubmission
+): Promise<ProtectedSurveyData> {
   try {
     if (typeof window === 'undefined' || !window.ethereum) {
       throw new Error('No Ethereum provider found. Please connect your wallet.');
@@ -34,15 +36,12 @@ export async function protectSurveyData(surveyData: {
       iexecOptions: { smsURL: TDX_SMS_URL },
     });
 
-    // Prepare the data object
-    const dataObject: Record<string, string | number> = {
+    // Prepare the data object (new structure)
+    const dataObject = {
       appVersion: 'Sum_v0.1',
-      surveyId: SURVEY_PROJECT_ID,
+      surveyProjectId: SURVEY_PROJECT_ID,
       submissionTimestamp: new Date().toISOString(),
-      q1_workload: surveyData.workload ?? 0,
-      q2_manager_support: surveyData.managerSupport ?? 0,
-      q3_company_alignment: surveyData.companyAlignment ?? 0,
-      q4_open_comment: surveyData.comments ?? '',
+      responses: surveyData.responses,
     };
 
     // Protect the data
