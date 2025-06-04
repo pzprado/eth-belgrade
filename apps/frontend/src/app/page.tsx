@@ -104,6 +104,3 @@ export default function Home() {
     </div>
   );
 }
-
-// Re-export for use in page
-export { EmployeeSurveyContent };
