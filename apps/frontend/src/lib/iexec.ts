@@ -1,5 +1,6 @@
 import { IExecDataProtectorCore } from '@iexec/dataprotector';
 import JSZip from 'jszip';
+import type { Eip1193Provider } from 'ethers';
 
 // This would come from environment variables in production
 const IEXEC_APP_ADDRESS = 'YOUR_DEPLOYED_IAPP_ADDRESS';
@@ -25,7 +26,8 @@ export async function protectSurveyData(surveyData: {
     if (typeof window === 'undefined' || !window.ethereum) {
       throw new Error('No Ethereum provider found. Please connect your wallet.');
     }
-    const dataProtector = new IExecDataProtectorCore(window.ethereum as any);
+    const provider = window.ethereum as Eip1193Provider;
+    const dataProtector = new IExecDataProtectorCore(provider);
 
     // Prepare the data object
     const dataObject: Record<string, string | number> = {
@@ -78,7 +80,8 @@ export async function processProtectedData({
   if (typeof window === 'undefined' || !window.ethereum) {
     throw new Error('No Ethereum provider found. Please connect your wallet.');
   }
-  const dataProtector = new IExecDataProtectorCore(window.ethereum as any);
+  const provider = window.ethereum as Eip1193Provider;
+  const dataProtector = new IExecDataProtectorCore(provider);
   const results: AggregationResult[] = [];
   for (const address of protectedDataAddresses) {
     // Each call processes one protected data object; for batch, see SDK docs
@@ -111,7 +114,8 @@ export async function getResultFromCompletedTask(taskId: string): Promise<Aggreg
   if (typeof window === 'undefined' || !window.ethereum) {
     throw new Error('No Ethereum provider found. Please connect your wallet.');
   }
-  const dataProtector = new IExecDataProtectorCore(window.ethereum as any);
+  const provider = window.ethereum as Eip1193Provider;
+  const dataProtector = new IExecDataProtectorCore(provider);
   const result = await dataProtector.getResultFromCompletedTask({ taskId });
   // result.result is an ArrayBuffer (zip file)
   const zip = await JSZip.loadAsync(result.result);
