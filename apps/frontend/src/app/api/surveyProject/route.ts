@@ -33,7 +33,7 @@ export async function POST(request: Request) {
     };
     surveyProjects.push(project);
     return NextResponse.json({ project }, { status: 201 });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
