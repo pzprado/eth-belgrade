@@ -10,13 +10,6 @@ declare global {
   }
 }
 
-function arrayToObject<T>(arr: T[]): Record<string, T> {
-  return arr.reduce((acc, item, idx) => {
-    acc[idx] = item;
-    return acc;
-  }, {} as Record<string, T>);
-}
-
 export interface ProtectedSurveyData {
   protectedDataAddress: string;
   owner: string;

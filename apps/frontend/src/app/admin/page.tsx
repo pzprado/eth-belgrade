@@ -3,7 +3,11 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { processProtectedData, getResultFromCompletedTask } from '@/lib/iexec';
+import {
+  processProtectedData,
+  getResultFromCompletedTask,
+  AggregationReport,
+} from '@/lib/iexec';
 
 interface SurveyRecord {
   protectedDataAddress: string;
@@ -15,13 +19,13 @@ const SURVEY_PROJECT_ID = 'demo_project'; // TODO: Replace with dynamic selectio
 
 export default function AdminPage() {
   const [surveyData, setSurveyData] = useState<SurveyRecord[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [aggStatus, setAggStatus] = useState<
     'idle' | 'processing' | 'fetching' | 'done' | 'error'
   >('idle');
   const [aggError, setAggError] = useState<string | null>(null);
-  const [aggReport, setAggReport] = useState<any | null>(null);
+  const [aggReport, setAggReport] = useState<AggregationReport | null>(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -34,8 +38,8 @@ export default function AdminPage() {
         if (!res.ok) throw new Error('Failed to fetch survey data');
         const data = await res.json();
         setSurveyData(data.responses || []);
-      } catch (err: any) {
-        setError(err.message || 'Error fetching data');
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Error fetching data');
       } finally {
         setLoading(false);
       }
@@ -60,13 +64,13 @@ export default function AdminPage() {
       const { taskId } = results[0];
       setAggStatus('fetching');
       // Poll for result
-      let report = null;
+      let report: AggregationReport | null = null;
       let attempts = 0;
       while (attempts < 20) {
         try {
           report = await getResultFromCompletedTask(taskId);
           break;
-        } catch (e) {
+        } catch {
           await new Promise((res) => setTimeout(res, 5000));
         }
         attempts++;
@@ -77,8 +81,8 @@ export default function AdminPage() {
         );
       setAggReport(report);
       setAggStatus('done');
-    } catch (e: any) {
-      setAggError(e.message || 'Aggregation failed');
+    } catch (err) {
+      setAggError(err instanceof Error ? err.message : 'Aggregation failed');
       setAggStatus('error');
     }
   };
