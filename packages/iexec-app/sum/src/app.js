@@ -99,11 +99,10 @@ async function main() {
     anonymousComments: comments,
   };
 
-  // Write output to iexec_out/computed.json
+  // Write output to output/computed.json
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
-  const outDir =
-    process.env.IEXEC_OUT || path.join(__dirname, '../../iexec_out');
+  const outDir = process.env.IEXEC_OUT || path.join(__dirname, '../output');
   try {
     await fs.mkdir(outDir, { recursive: true });
   } catch {}

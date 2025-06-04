@@ -16,9 +16,9 @@ lerna-debug.log*
 out/
 
 # iExec (example, adjust based on iApp actual output)
-packages/iexec-app/iexec_out/
-packages/iexec-app/iexec.json
-packages/iexec-app/.sgx_data/
+packages/iexec-app/sum/.sgx_data/
+packages/iexec-app/sum/output/
+packages/iexec-app/sum/iapp.config.json
 
 # Operating System files
 .DS_Store
