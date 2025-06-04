@@ -41,8 +41,8 @@ async function main() {
     process.exit(1);
   }
 
-  // Expect surveyResponses to be an array of objects with .responses (object of answers)
-  // See .idea/DATA_STRUCTURES.md for expected structure
+  // Expect surveyResponses to be an array of flat objects (no .responses)
+  // TDX compatible: schema must match frontend protectData
 
   // Aggregate scores and comments
   const ratingQuestions = [
@@ -70,17 +70,13 @@ async function main() {
 
   for (const resp of surveyResponses) {
     if (resp.surveyId) surveyId = resp.surveyId;
-    const r = resp.responses || resp;
-    if (r.q1_workload?.answerValue)
-      scores.q1_workload.push(Number(r.q1_workload.answerValue));
-    if (r.q2_manager_support?.answerValue)
-      scores.q2_manager_support.push(Number(r.q2_manager_support.answerValue));
-    if (r.q3_company_alignment?.answerValue)
-      scores.q3_company_alignment.push(
-        Number(r.q3_company_alignment.answerValue)
-      );
-    if (r.q4_open_comment?.answerValue)
-      comments.push(r.q4_open_comment.answerValue);
+    if (typeof resp.q1_workload === 'number')
+      scores.q1_workload.push(resp.q1_workload);
+    if (typeof resp.q2_manager_support === 'number')
+      scores.q2_manager_support.push(resp.q2_manager_support);
+    if (typeof resp.q3_company_alignment === 'number')
+      scores.q3_company_alignment.push(resp.q3_company_alignment);
+    if (resp.q4_open_comment) comments.push(resp.q4_open_comment);
   }
 
   const aggregatedScores = ratingQuestions.map((q) => ({

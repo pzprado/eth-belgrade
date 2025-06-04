@@ -3,7 +3,10 @@ import JSZip from 'jszip';
 import type { Eip1193Provider } from 'ethers';
 
 // This would come from environment variables in production
-const IEXEC_APP_ADDRESS = 'YOUR_DEPLOYED_IAPP_ADDRESS';
+const IEXEC_APP_ADDRESS = process.env.NEXT_PUBLIC_IEXEC_APP_ADDRESS || '0xFallbackAddress';
+const TDX_SMS_URL = process.env.NEXT_PUBLIC_IEXEC_TDX_SMS_URL || 'https://sms.labs.iex.ec';
+const TDX_WORKERPOOL = process.env.NEXT_PUBLIC_IEXEC_TDX_WORKERPOOL || 'tdx-labs.pools.iexec.eth';
+const SURVEY_PROJECT_ID = process.env.NEXT_PUBLIC_SURVEY_PROJECT_ID || 'sum_alpha';
 
 declare global {
   interface Window {
@@ -27,12 +30,14 @@ export async function protectSurveyData(surveyData: {
       throw new Error('No Ethereum provider found. Please connect your wallet.');
     }
     const provider = window.ethereum as Eip1193Provider;
-    const dataProtector = new IExecDataProtectorCore(provider);
+    const dataProtector = new IExecDataProtectorCore(provider, {
+      iexecOptions: { smsURL: TDX_SMS_URL },
+    });
 
     // Prepare the data object
     const dataObject: Record<string, string | number> = {
       appVersion: 'Sum_v0.1',
-      surveyId: `pulse_${new Date().toISOString().split('T')[0]}`,
+      surveyId: SURVEY_PROJECT_ID,
       submissionTimestamp: new Date().toISOString(),
       q1_workload: surveyData.workload ?? 0,
       q2_manager_support: surveyData.managerSupport ?? 0,
@@ -70,25 +75,26 @@ export interface AggregationResult {
 
 export async function processProtectedData({
   protectedDataAddresses,
-  surveyProjectId,
   iAppAddress = IEXEC_APP_ADDRESS,
 }: {
   protectedDataAddresses: string[];
-  surveyProjectId: string;
   iAppAddress?: string;
 }): Promise<AggregationResult[]> {
   if (typeof window === 'undefined' || !window.ethereum) {
     throw new Error('No Ethereum provider found. Please connect your wallet.');
   }
   const provider = window.ethereum as Eip1193Provider;
-  const dataProtector = new IExecDataProtectorCore(provider);
+  const dataProtector = new IExecDataProtectorCore(provider, {
+    iexecOptions: { smsURL: TDX_SMS_URL },
+  });
   const results: AggregationResult[] = [];
   for (const address of protectedDataAddresses) {
     // Each call processes one protected data object; for batch, see SDK docs
     const res = await dataProtector.processProtectedData({
       protectedData: address,
       app: iAppAddress,
-      args: surveyProjectId,
+      args: SURVEY_PROJECT_ID,
+      workerpool: TDX_WORKERPOOL,
     });
     results.push({ taskId: res.taskId });
   }
@@ -115,7 +121,9 @@ export async function getResultFromCompletedTask(taskId: string): Promise<Aggreg
     throw new Error('No Ethereum provider found. Please connect your wallet.');
   }
   const provider = window.ethereum as Eip1193Provider;
-  const dataProtector = new IExecDataProtectorCore(provider);
+  const dataProtector = new IExecDataProtectorCore(provider, {
+    iexecOptions: { smsURL: TDX_SMS_URL },
+  });
   const result = await dataProtector.getResultFromCompletedTask({ taskId });
   // result.result is an ArrayBuffer (zip file)
   const zip = await JSZip.loadAsync(result.result);
