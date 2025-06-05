@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import { CivicAuthProvider } from '@civic/auth/nextjs';
+import { CivicAuthProvider } from '@civic/auth-web3/nextjs';
 import Navbar from '../components/Navbar';
 
 const geistSans = Geist({

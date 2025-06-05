@@ -1,4 +1,4 @@
-import { createCivicAuthPlugin } from "@civic/auth/nextjs"
+import { createCivicAuthPlugin } from "@civic/auth-web3/nextjs"
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {

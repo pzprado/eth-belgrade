@@ -11,7 +11,7 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { useState } from 'react';
 import { protectSurveyData } from '@/lib/iexec';
-import { User } from '@civic/auth';
+import { useUser } from '@civic/auth-web3/react';
 import { Calendar, ShieldCheck, Clock } from 'lucide-react';
 
 // Add the global question set (normally imported from a shared config)
@@ -95,7 +95,8 @@ const initialAnswers = Object.fromEntries(
   SUM_GLOBAL_QUESTIONS.map((q) => [q.questionId, q.type === 'text' ? '' : null])
 );
 
-export function EmployeeSurveyContent({ user }: { user: User }) {
+export function EmployeeSurveyContent() {
+  const { user } = useUser();
   const [answers, setAnswers] = useState<{
     [key: string]: number | string | null;
   }>(initialAnswers);
@@ -189,18 +190,16 @@ export function EmployeeSurveyContent({ user }: { user: User }) {
   );
 
   const firstName =
-    user.name?.split(' ')[0] || user.email?.split('@')[0] || 'Employee';
+    user?.name?.split(' ')[0] || user?.email?.split('@')[0] || 'Employee';
 
   return (
     <div className='w-full max-w-2xl flex flex-col gap-6'>
       {/* Top intro card */}
-      <Card className='mb-2'>
-        <CardContent className='py-6'>
+      <Card className='mb-2 mt-4'>
+        <CardContent className='py-6 '>
           <div className='flex items-center justify-between mb-2'>
             <div className='flex flex-col gap-1'>
-              <span className='text-lg font-bold'>
-                Employee Satisfaction Survey
-              </span>
+              <span className='text-4xl font-bold'>Satisfaction Survey</span>
               <span className='text-slate-600 text-sm'>
                 Your feedback helps us create a better workplace. This survey is
                 encrypted, anonymous and takes about 5 minutes to complete.
@@ -237,7 +236,7 @@ export function EmployeeSurveyContent({ user }: { user: User }) {
         <CardContent className='flex flex-col gap-8'>
           {SUM_GLOBAL_QUESTIONS.map((q) => (
             <div className='mb-6' key={q.questionId}>
-              <label className='text-lg font-semibold'>
+              <label className='text-xl font-semibold'>
                 {q.text.replace('[Our Company]', 'Sum')}
                 {q.type === 'rating_1_5' && (
                   <span className='text-destructive'>*</span>

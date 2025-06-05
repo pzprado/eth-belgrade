@@ -1,6 +1,6 @@
 'use client';
 
-import { UserButton, useUser } from '@civic/auth/react';
+import { UserButton, useUser } from '@civic/auth-web3/react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useState } from 'react';
 import { EmployeeSurveyContent } from './employee/EmployeeSurveyContent';
@@ -51,7 +51,7 @@ export default function Home() {
   return (
     <div className='flex flex-col min-h-screen bg-slate-50'>
       <main className='flex flex-col items-center justify-center flex-1'>
-        <EmployeeSurveyContent user={user} />
+        <EmployeeSurveyContent />
       </main>
     </div>
   );

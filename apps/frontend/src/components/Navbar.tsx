@@ -1,5 +1,5 @@
 'use client';
-import { useUser, UserButton } from '@civic/auth/react';
+import { useUser, UserButton } from '@civic/auth-web3/react';
 
 export default function Navbar() {
   const { user } = useUser();
@@ -20,7 +20,7 @@ export default function Navbar() {
       {user && (
         <div className='flex items-center gap-4'>
           <span className='text-base text-slate-700'>Welcome back</span>
-          <UserButton />
+          <UserButton className='w-10 h-10' />
         </div>
       )}
     </nav>
