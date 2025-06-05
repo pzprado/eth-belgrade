@@ -10,6 +10,7 @@ import {
 } from '@/lib/iexec';
 import path from 'path';
 import process from 'process';
+import { Smile, Meh, Frown, TrendingUp, Users, BarChart } from 'lucide-react';
 
 interface SurveyRecord {
   protectedDataAddress: string;
@@ -94,12 +95,6 @@ export default function AdminPage() {
     <div className='flex min-h-screen bg-slate-50'>
       {/* Sidebar */}
       <aside className='w-64 bg-white border-r flex flex-col py-6 px-4'>
-        <div className='mb-8 flex items-center gap-2'>
-          <div className='bg-blue-100 text-blue-700 rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg'>
-            K
-          </div>
-          <span className='font-semibold text-lg'>Kinetar</span>
-        </div>
         <nav className='flex-1'>
           <div className='mb-4'>
             <div className='uppercase text-xs text-slate-400 font-semibold mb-2'>
@@ -163,7 +158,6 @@ export default function AdminPage() {
               <div className='text-slate-400 text-xs mt-1 flex gap-4'>
                 <span>a month ago</span>
                 <span>•</span>
-                <span>a month ago</span>
               </div>
             </div>
             <div className='flex gap-2'>
@@ -184,85 +178,97 @@ export default function AdminPage() {
           {/* Summary Cards */}
           <div className='grid grid-cols-4 gap-4 mb-8'>
             {/* Engagement Score */}
-            <Card className='col-span-1 flex flex-col items-center justify-center py-6'>
-              <CardContent className='flex flex-col items-center'>
-                <div className='text-slate-500 text-xs mb-2'>
+            <Card className='col-span-1 min-h-[160px] flex flex-col justify-between p-4'>
+              <CardContent className='flex flex-col h-full p-0 w-full'>
+                <div className='w-full text-left text-slate-500 text-xs mb-2'>
                   Engagement score
                 </div>
-                <div className='text-6xl font-bold text-green-700 mb-2'>
-                  7.4
-                </div>
-                <div className='flex items-center gap-2 text-xs text-slate-500'>
-                  <span>eNPS Distribution:</span>
-                  <span className='text-green-700 font-semibold'>
-                    42% Promoters
-                  </span>
-                  <span className='text-slate-400'>|</span>
-                  <span className='text-slate-700'>32% Passives</span>
-                  <span className='text-slate-400'>|</span>
-                  <span className='text-red-600 font-semibold'>
-                    26% Detractors
-                  </span>
+                <div className='flex flex-col items-center justify-center flex-1 w-full'>
+                  <div className='text-5xl font-bold text-green-700 mb-2 text-center'>
+                    7.4
+                  </div>
+                  <div className='flex flex-col items-start gap-y-1 text-xs mt-1 w-full'>
+                    <span className='text-slate-500 mb-1'>
+                      eNPS Distribution:
+                    </span>
+                    <span className='flex items-center gap-1 text-green-700 font-semibold'>
+                      <Smile className='w-4 h-4 text-green-700' /> 42% Promoters
+                    </span>
+                    <span className='flex items-center gap-1 text-slate-700'>
+                      <Meh className='w-4 h-4 text-slate-500' /> 32% Passives
+                    </span>
+                    <span className='flex items-center gap-1 text-red-600 font-semibold'>
+                      <Frown className='w-4 h-4 text-red-600' /> 26% Detractors
+                    </span>
+                  </div>
                 </div>
               </CardContent>
             </Card>
             {/* Outcomes */}
-            <Card className='col-span-1 flex flex-col justify-center py-6'>
-              <CardContent>
-                <div className='text-slate-500 text-xs mb-2'>Outcomes</div>
-                <div className='text-lg font-bold text-slate-700 mb-1'>
-                  0.7 below{' '}
-                  <span className='text-slate-400 font-normal'>
-                    True Benchmark® 8.1
+            <Card className='col-span-1 min-h-[160px] flex flex-col justify-between p-4'>
+              <CardContent className='flex flex-col h-full p-0 w-full'>
+                <div className='w-full text-left text-slate-500 text-xs mb-2'>
+                  Outcomes
+                </div>
+                <div className='flex flex-col items-center justify-center flex-1 w-full'>
+                  <span className='text-lg font-bold text-slate-700 mb-1'>
+                    <span className='font-bold'>0.7 below</span>{' '}
+                    <span className='text-slate-400 font-normal'>
+                      True Benchmark® 8.1
+                    </span>
                   </span>
-                </div>
-                <div className='text-xs text-slate-500 mb-2'>
-                  Room for improvement
-                </div>
-                <div className='text-xs text-slate-500'>
-                  In the bottom 25% of Technology
+                  <span className='text-xs text-slate-500 mb-1'>
+                    Room for improvement
+                  </span>
+                  <span className='text-xs text-slate-500'>
+                    In the bottom 25% of Technology
+                  </span>
                 </div>
               </CardContent>
             </Card>
             {/* Score over time */}
-            <Card className='col-span-1 flex flex-col justify-center py-6'>
-              <CardContent>
-                <div className='text-slate-500 text-xs mb-2'>
+            <Card className='col-span-1 min-h-[160px] flex flex-col justify-between p-4'>
+              <CardContent className='flex flex-col h-full p-0 w-full'>
+                <div className='w-full text-left text-slate-500 text-xs mb-2'>
                   Score over time
                 </div>
-                <div className='flex items-center gap-2 mb-2'>
-                  <span className='text-xs text-slate-500'>
+                <div className='flex flex-col items-center justify-center flex-1 w-full'>
+                  <span className='text-xs text-slate-500 mb-2'>
                     No change since 2 Jan
                   </span>
-                </div>
-                <div className='h-16 flex items-center justify-center'>
-                  <svg width='100' height='40'>
-                    <polyline
-                      points='0,30 20,28 40,28 60,28 80,28 100,28'
-                      fill='none'
-                      stroke='#94a3b8'
-                      strokeWidth='2'
-                    />
-                  </svg>
+                  <div className='h-10 flex items-center justify-center'>
+                    <svg width='80' height='24'>
+                      <polyline
+                        points='0,18 16,16 32,16 48,16 64,16 80,16'
+                        fill='none'
+                        stroke='#94a3b8'
+                        strokeWidth='2'
+                      />
+                    </svg>
+                  </div>
                 </div>
               </CardContent>
             </Card>
             {/* Participation */}
-            <Card className='col-span-1 flex flex-col justify-center py-6'>
-              <CardContent>
-                <div className='text-slate-500 text-xs mb-2'>Participation</div>
-                <div className='text-lg font-bold text-slate-700 mb-1'>
-                  93% aggregated participation rate
+            <Card className='col-span-1 min-h-[160px] flex flex-col justify-between p-4'>
+              <CardContent className='flex flex-col h-full p-0 w-full'>
+                <div className='w-full text-left text-slate-500 text-xs mb-2'>
+                  Participation
                 </div>
-                <div className='text-xs text-slate-500 mb-2'>
-                  3 percentage points above benchmark (90%)
-                </div>
-                <div className='text-xs text-slate-500'>
-                  Engagement score based on 761 employees (out of 828 who
-                  received the survey)
-                </div>
-                <div className='text-xs text-green-700 mt-2'>
-                  Aggregate score accuracy: <b>High</b>
+                <div className='flex flex-col items-center justify-center flex-1 w-full'>
+                  <span className='text-base font-bold text-slate-800 mb-1'>
+                    93% aggregated participation rate
+                  </span>
+                  <span className='text-xs text-slate-500 mb-1'>
+                    3 percentage points above benchmark (90%)
+                  </span>
+                  <span className='text-xs text-slate-500'>
+                    Engagement score based on 761 employees (out of 828 who
+                    received the survey)
+                  </span>
+                  <span className='text-xs text-green-700 mt-1'>
+                    Aggregate score accuracy: <b>High</b>
+                  </span>
                 </div>
               </CardContent>
             </Card>
