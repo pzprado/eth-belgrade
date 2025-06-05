@@ -36,12 +36,21 @@ export async function protectSurveyData(
       iexecOptions: { smsURL: TDX_SMS_URL },
     });
 
+    // Convert responses array to object for iExec DataProtector
+    const responsesObject = surveyData.responses.reduce(
+      (acc, curr) => ({
+        ...acc,
+        [curr.questionId]: curr.answerValue,
+      }),
+      {}
+    );
+
     // Prepare the data object (new structure)
     const dataObject = {
       appVersion: 'Sum_v0.1',
       surveyProjectId: SURVEY_PROJECT_ID,
       submissionTimestamp: new Date().toISOString(),
-      responses: surveyData.responses,
+      responses: responsesObject,
     };
 
     // Protect the data
@@ -74,7 +83,7 @@ export interface AggregationResult {
 
 export async function processProtectedData({
   protectedDataAddresses,
-  iAppAddress = IEXEC_APP_ADDRESS,
+  iAppAddress = process.env.NEXT_PUBLIC_IEXEC_APP_ADDRESS || '0xF8e28d5776283b55455CECE9d1962AFd42113ABD',
 }: {
   protectedDataAddresses: string[];
   iAppAddress?: string;

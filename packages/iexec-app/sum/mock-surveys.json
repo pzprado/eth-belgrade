@@ -6,6 +6,171 @@
         "responses": [
             {
                 "questionId": "core_advocacy",
+                "answerValue": 8
+            },
+            {
+                "questionId": "core_loyalty",
+                "answerValue": 7
+            },
+            {
+                "questionId": "core_satisfaction",
+                "answerValue": 9
+            },
+            {
+                "questionId": "driver_accomplishment",
+                "answerValue": 6
+            },
+            {
+                "questionId": "driver_autonomy",
+                "answerValue": 8
+            },
+            {
+                "questionId": "driver_growth_main",
+                "answerValue": 7
+            },
+            {
+                "questionId": "driver_growth_learning",
+                "answerValue": 8
+            },
+            {
+                "questionId": "driver_managementsupport_main",
+                "answerValue": 9
+            },
+            {
+                "questionId": "driver_managementsupport_caring",
+                "answerValue": 10
+            },
+            {
+                "questionId": "driver_meaningfulwork_main",
+                "answerValue": 8
+            },
+            {
+                "questionId": "driver_workload_main",
+                "answerValue": 7
+            },
+            {
+                "questionId": "open_comment",
+                "answerValue": "Great team spirit!"
+            }
+        ]
+    },
+    {
+        "appVersion": "Sum_v0.1",
+        "surveyProjectId": "orgA_q3_2025_pulse",
+        "submissionTimestamp": "2025-06-04T10:31:00Z",
+        "responses": [
+            {
+                "questionId": "core_advocacy",
+                "answerValue": 5
+            },
+            {
+                "questionId": "core_loyalty",
+                "answerValue": 6
+            },
+            {
+                "questionId": "core_satisfaction",
+                "answerValue": 7
+            },
+            {
+                "questionId": "driver_accomplishment",
+                "answerValue": 6
+            },
+            {
+                "questionId": "driver_autonomy",
+                "answerValue": 5
+            },
+            {
+                "questionId": "driver_growth_main",
+                "answerValue": 6
+            },
+            {
+                "questionId": "driver_growth_learning",
+                "answerValue": 7
+            },
+            {
+                "questionId": "driver_managementsupport_main",
+                "answerValue": 8
+            },
+            {
+                "questionId": "driver_managementsupport_caring",
+                "answerValue": 7
+            },
+            {
+                "questionId": "driver_meaningfulwork_main",
+                "answerValue": 6
+            },
+            {
+                "questionId": "driver_workload_main",
+                "answerValue": 5
+            },
+            {
+                "questionId": "open_comment",
+                "answerValue": "Workload is sometimes too high."
+            }
+        ]
+    },
+    {
+        "appVersion": "Sum_v0.1",
+        "surveyProjectId": "orgA_q3_2025_pulse",
+        "submissionTimestamp": "2025-06-04T10:32:00Z",
+        "responses": [
+            {
+                "questionId": "core_advocacy",
+                "answerValue": 9
+            },
+            {
+                "questionId": "core_loyalty",
+                "answerValue": 9
+            },
+            {
+                "questionId": "core_satisfaction",
+                "answerValue": 10
+            },
+            {
+                "questionId": "driver_accomplishment",
+                "answerValue": 9
+            },
+            {
+                "questionId": "driver_autonomy",
+                "answerValue": 8
+            },
+            {
+                "questionId": "driver_growth_main",
+                "answerValue": 9
+            },
+            {
+                "questionId": "driver_growth_learning",
+                "answerValue": 10
+            },
+            {
+                "questionId": "driver_managementsupport_main",
+                "answerValue": 10
+            },
+            {
+                "questionId": "driver_managementsupport_caring",
+                "answerValue": 10
+            },
+            {
+                "questionId": "driver_meaningfulwork_main",
+                "answerValue": 9
+            },
+            {
+                "questionId": "driver_workload_main",
+                "answerValue": 8
+            },
+            {
+                "questionId": "open_comment",
+                "answerValue": "Love working here!"
+            }
+        ]
+    },
+    {
+        "appVersion": "Sum_v0.1",
+        "surveyProjectId": "orgA_q3_2025_pulse",
+        "submissionTimestamp": "2025-06-04T10:33:00Z",
+        "responses": [
+            {
+                "questionId": "core_advocacy",
                 "answerValue": 4
             },
             {
@@ -14,7 +179,7 @@
             },
             {
                 "questionId": "core_satisfaction",
-                "answerValue": 3
+                "answerValue": 6
             },
             {
                 "questionId": "driver_accomplishment",
@@ -26,31 +191,86 @@
             },
             {
                 "questionId": "driver_growth_main",
-                "answerValue": 3
+                "answerValue": 5
             },
             {
                 "questionId": "driver_growth_learning",
-                "answerValue": 4
+                "answerValue": 6
             },
             {
                 "questionId": "driver_managementsupport_main",
-                "answerValue": 5
+                "answerValue": 7
             },
             {
                 "questionId": "driver_managementsupport_caring",
-                "answerValue": 5
+                "answerValue": 6
             },
             {
                 "questionId": "driver_meaningfulwork_main",
-                "answerValue": 4
+                "answerValue": 5
             },
             {
                 "questionId": "driver_workload_main",
-                "answerValue": 2
+                "answerValue": 4
             },
             {
                 "questionId": "open_comment",
-                "answerValue": "The new project is exciting but we need more resources."
+                "answerValue": "Could use more support from management."
+            }
+        ]
+    },
+    {
+        "appVersion": "Sum_v0.1",
+        "surveyProjectId": "orgA_q3_2025_pulse",
+        "submissionTimestamp": "2025-06-04T10:34:00Z",
+        "responses": [
+            {
+                "questionId": "core_advocacy",
+                "answerValue": 7
+            },
+            {
+                "questionId": "core_loyalty",
+                "answerValue": 8
+            },
+            {
+                "questionId": "core_satisfaction",
+                "answerValue": 7
+            },
+            {
+                "questionId": "driver_accomplishment",
+                "answerValue": 8
+            },
+            {
+                "questionId": "driver_autonomy",
+                "answerValue": 7
+            },
+            {
+                "questionId": "driver_growth_main",
+                "answerValue": 8
+            },
+            {
+                "questionId": "driver_growth_learning",
+                "answerValue": 7
+            },
+            {
+                "questionId": "driver_managementsupport_main",
+                "answerValue": 8
+            },
+            {
+                "questionId": "driver_managementsupport_caring",
+                "answerValue": 9
+            },
+            {
+                "questionId": "driver_meaningfulwork_main",
+                "answerValue": 8
+            },
+            {
+                "questionId": "driver_workload_main",
+                "answerValue": 7
+            },
+            {
+                "questionId": "open_comment",
+                "answerValue": "Happy with the current projects."
             }
         ]
     },
@@ -161,6 +381,281 @@
             {
                 "questionId": "open_comment",
                 "answerValue": "Could use more team events."
+            }
+        ]
+    },
+    {
+        "appVersion": "Sum_v0.1",
+        "surveyProjectId": "orgA_q3_2025_pulse",
+        "submissionTimestamp": "2025-06-04T10:36:00Z",
+        "responses": [
+            {
+                "questionId": "core_advocacy",
+                "answerValue": 7
+            },
+            {
+                "questionId": "core_loyalty",
+                "answerValue": 8
+            },
+            {
+                "questionId": "core_satisfaction",
+                "answerValue": 8
+            },
+            {
+                "questionId": "driver_accomplishment",
+                "answerValue": 8
+            },
+            {
+                "questionId": "driver_autonomy",
+                "answerValue": 7
+            },
+            {
+                "questionId": "driver_growth_main",
+                "answerValue": 8
+            },
+            {
+                "questionId": "driver_growth_learning",
+                "answerValue": 8
+            },
+            {
+                "questionId": "driver_managementsupport_main",
+                "answerValue": 9
+            },
+            {
+                "questionId": "driver_managementsupport_caring",
+                "answerValue": 9
+            },
+            {
+                "questionId": "driver_meaningfulwork_main",
+                "answerValue": 8
+            },
+            {
+                "questionId": "driver_workload_main",
+                "answerValue": 7
+            },
+            {
+                "questionId": "open_comment",
+                "answerValue": "Team meetings could be shorter."
+            }
+        ]
+    },
+    {
+        "appVersion": "Sum_v0.1",
+        "surveyProjectId": "orgA_q3_2025_pulse",
+        "submissionTimestamp": "2025-06-04T10:37:00Z",
+        "responses": [
+            {
+                "questionId": "core_advocacy",
+                "answerValue": 5
+            },
+            {
+                "questionId": "core_loyalty",
+                "answerValue": 5
+            },
+            {
+                "questionId": "core_satisfaction",
+                "answerValue": 6
+            },
+            {
+                "questionId": "driver_accomplishment",
+                "answerValue": 6
+            },
+            {
+                "questionId": "driver_autonomy",
+                "answerValue": 5
+            },
+            {
+                "questionId": "driver_growth_main",
+                "answerValue": 6
+            },
+            {
+                "questionId": "driver_growth_learning",
+                "answerValue": 6
+            },
+            {
+                "questionId": "driver_managementsupport_main",
+                "answerValue": 7
+            },
+            {
+                "questionId": "driver_managementsupport_caring",
+                "answerValue": 7
+            },
+            {
+                "questionId": "driver_meaningfulwork_main",
+                "answerValue": 6
+            },
+            {
+                "questionId": "driver_workload_main",
+                "answerValue": 5
+            },
+            {
+                "questionId": "open_comment",
+                "answerValue": "Would like more training opportunities."
+            }
+        ]
+    },
+    {
+        "appVersion": "Sum_v0.1",
+        "surveyProjectId": "orgA_q3_2025_pulse",
+        "submissionTimestamp": "2025-06-04T10:38:00Z",
+        "responses": [
+            {
+                "questionId": "core_advocacy",
+                "answerValue": 9
+            },
+            {
+                "questionId": "core_loyalty",
+                "answerValue": 8
+            },
+            {
+                "questionId": "core_satisfaction",
+                "answerValue": 9
+            },
+            {
+                "questionId": "driver_accomplishment",
+                "answerValue": 8
+            },
+            {
+                "questionId": "driver_autonomy",
+                "answerValue": 9
+            },
+            {
+                "questionId": "driver_growth_main",
+                "answerValue": 8
+            },
+            {
+                "questionId": "driver_growth_learning",
+                "answerValue": 9
+            },
+            {
+                "questionId": "driver_managementsupport_main",
+                "answerValue": 10
+            },
+            {
+                "questionId": "driver_managementsupport_caring",
+                "answerValue": 10
+            },
+            {
+                "questionId": "driver_meaningfulwork_main",
+                "answerValue": 9
+            },
+            {
+                "questionId": "driver_workload_main",
+                "answerValue": 8
+            },
+            {
+                "questionId": "open_comment",
+                "answerValue": "Love the new office space!"
+            }
+        ]
+    },
+    {
+        "appVersion": "Sum_v0.1",
+        "surveyProjectId": "orgA_q3_2025_pulse",
+        "submissionTimestamp": "2025-06-04T10:39:00Z",
+        "responses": [
+            {
+                "questionId": "core_advocacy",
+                "answerValue": 6
+            },
+            {
+                "questionId": "core_loyalty",
+                "answerValue": 7
+            },
+            {
+                "questionId": "core_satisfaction",
+                "answerValue": 7
+            },
+            {
+                "questionId": "driver_accomplishment",
+                "answerValue": 7
+            },
+            {
+                "questionId": "driver_autonomy",
+                "answerValue": 6
+            },
+            {
+                "questionId": "driver_growth_main",
+                "answerValue": 7
+            },
+            {
+                "questionId": "driver_growth_learning",
+                "answerValue": 7
+            },
+            {
+                "questionId": "driver_managementsupport_main",
+                "answerValue": 8
+            },
+            {
+                "questionId": "driver_managementsupport_caring",
+                "answerValue": 8
+            },
+            {
+                "questionId": "driver_meaningfulwork_main",
+                "answerValue": 7
+            },
+            {
+                "questionId": "driver_workload_main",
+                "answerValue": 6
+            },
+            {
+                "questionId": "open_comment",
+                "answerValue": "More feedback from management would help."
+            }
+        ]
+    },
+    {
+        "appVersion": "Sum_v0.1",
+        "surveyProjectId": "orgA_q3_2025_pulse",
+        "submissionTimestamp": "2025-06-04T10:40:00Z",
+        "responses": [
+            {
+                "questionId": "core_advocacy",
+                "answerValue": 7
+            },
+            {
+                "questionId": "core_loyalty",
+                "answerValue": 8
+            },
+            {
+                "questionId": "core_satisfaction",
+                "answerValue": 8
+            },
+            {
+                "questionId": "driver_accomplishment",
+                "answerValue": 8
+            },
+            {
+                "questionId": "driver_autonomy",
+                "answerValue": 7
+            },
+            {
+                "questionId": "driver_growth_main",
+                "answerValue": 8
+            },
+            {
+                "questionId": "driver_growth_learning",
+                "answerValue": 8
+            },
+            {
+                "questionId": "driver_managementsupport_main",
+                "answerValue": 9
+            },
+            {
+                "questionId": "driver_managementsupport_caring",
+                "answerValue": 9
+            },
+            {
+                "questionId": "driver_meaningfulwork_main",
+                "answerValue": 8
+            },
+            {
+                "questionId": "driver_workload_main",
+                "answerValue": 7
+            },
+            {
+                "questionId": "open_comment",
+                "answerValue": "Enjoy the team lunches!"
             }
         ]
     }

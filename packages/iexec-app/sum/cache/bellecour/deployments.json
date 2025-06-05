@@ -1,5 +1,17 @@
 [
   {
+    "sconifiedImage": "0xprado/sum:0.0.1-tdx-e64652c932b9",
+    "appContractAddress": "0xF8e28d5776283b55455CECE9d1962AFd42113ABD",
+    "owner": "0x442bD94ED8b6478505f37FDc18f307D8a40fA7e9",
+    "date": "2025-06-05T00:08:16.187Z"
+  },
+  {
+    "sconifiedImage": "0xprado/sum:0.0.1-tdx-99eaea37a2b2",
+    "appContractAddress": "0xD8D05a1A02D66498a8FFB7B53591547b8868874e",
+    "owner": "0x442bD94ED8b6478505f37FDc18f307D8a40fA7e9",
+    "date": "2025-06-04T23:48:10.655Z"
+  },
+  {
     "sconifiedImage": "0xprado/sum:0.0.1-tdx-7d3d730f18a2",
     "appContractAddress": "0xe19E0444C926CFAAc178fADDeaDFd02b33652A1C",
     "owner": "0x442bD94ED8b6478505f37FDc18f307D8a40fA7e9",

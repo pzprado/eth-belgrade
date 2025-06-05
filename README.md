@@ -9,8 +9,8 @@ Sum is a decentralized application for conducting anonymous employee pulse surve
 - `/scripts/origintrail-publisher`: Scripts for publishing aggregated data to OriginTrail DKG.
 
 ## Features (MVP)
-- Employee UI: Submit anonymous, encrypted survey responses (3 rating questions, 1 text question)
-- Admin UI: View submitted survey data, trigger aggregation (iExec integration in progress)
+- Employee UI: Submit anonymous, encrypted survey responses (11 rating questions, 1 text question; all ratings use a 1–10 scale)
+- Admin UI: View submitted survey data, trigger aggregation, and view anonymized report (iExec integration functional)
 - API: `/api/submitSurvey` (POST), `/api/getSurveyData` (GET)
 - Uses shadcn for UI components and Tailwind CSS for styling
 
@@ -29,7 +29,8 @@ Sum is a decentralized application for conducting anonymous employee pulse surve
 
 ## Development Notes
 - Employee survey data is encrypted client-side using iExec DataProtector and stored via API.
-- Admin UI displays all submitted survey data and will support aggregation via iExec iApp.
+- Admin UI displays all submitted survey data and supports aggregation/reporting via iExec iApp.
+- The iApp expects an array of survey responses, each with a `responses` object keyed by `questionId`.
 - See `.idea/PRD.md` and `.idea/TASKS.md` for requirements and progress.
 
 ## Status

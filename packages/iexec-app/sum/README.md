@@ -51,39 +51,24 @@ chmod +x deploy.sh
 ---
 
 ## Dataset Type / Schema
-- The iApp expects a flat JSON object for each survey response, matching the frontend's `protectData` schema.
-- Example:
+- The iApp expects an array of survey responses, each with a `responses` object keyed by `questionId` (not a flat object).
+- Example input:
   ```json
-  {
-    "appVersion": "Sum_v0.1",
-    "surveyId": "demo_project",
-    "submissionTimestamp": "...",
-    "q1_workload": 4,
-    "q2_manager_support": 5,
-    "q3_company_alignment": 3,
-    "q4_open_comment": "Great place to work!"
-  }
+  [
+    {
+      "appVersion": "Sum_v0.1",
+      "surveyProjectId": "demo_project",
+      "submissionTimestamp": "...",
+      "responses": {
+        "core_advocacy": 8,
+        "core_loyalty": 7,
+        "core_satisfaction": 9,
+        // ...
+        "open_comment": "Great place to work!"
+      }
+    }
+  ]
   ```
+- All rating questions use a 1–10 scale.
 - The frontend must use the TDX SMS endpoint:
-  ```js
-  const dataProtector = new IExecDataProtectorCore(window.ethereum, {
-    iexecOptions: { smsURL: 'https://sms.labs.iex.ec' },
-  });
   ```
-- When calling `processProtectedData`, use the TDX workerpool:
-  ```js
-  await dataProtector.processProtectedData({
-    protectedData: protectedData.address,
-    app: '0xYourIAppAddress',
-    workerpool: 'tdx-labs.pools.iexec.eth',
-    args: 'demo_project',
-  });
-  ```
-
-## Hackathon Checklist
-- [x] TDX mode enabled on deploy (`EXPERIMENTAL_TDX_APP=true`)
-- [x] TDX SMS endpoint used in frontend
-- [x] TDX workerpool used for all jobs
-- [x] Flat schema for survey responses
-- [x] Aggregation and anonymized output only
-- [x] No PII or wallet addresses in output
