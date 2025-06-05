@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { addSurveyResponse, SurveyResponse } from '@/lib/surveyStore';
+import { addSurveyResponse } from '@/lib/surveyStore';
 
 export async function POST(request: Request) {
   try {

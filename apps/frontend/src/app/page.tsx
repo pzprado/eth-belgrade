@@ -2,13 +2,10 @@
 
 import { UserButton, useUser } from '@civic/auth-web3/react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useState } from 'react';
 import { EmployeeSurveyContent } from './employee/EmployeeSurveyContent';
-import AdminPage from './admin/page';
 
 export default function Home() {
   const { user, isLoading } = useUser();
-  const [showAdmin, setShowAdmin] = useState(false);
 
   if (isLoading) {
     return (
@@ -32,17 +29,6 @@ export default function Home() {
             </p>
           </CardContent>
         </Card>
-      </div>
-    );
-  }
-
-  // If user clicks admin icon, show admin/project management UI
-  if (showAdmin) {
-    return (
-      <div className='flex flex-col min-h-screen bg-slate-50'>
-        <main className='flex flex-col items-center justify-center flex-1'>
-          <AdminPage />
-        </main>
       </div>
     );
   }

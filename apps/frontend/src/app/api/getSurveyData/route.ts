@@ -13,7 +13,7 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const surveyProjectId = searchParams.get('surveyProjectId');
-    let allResponses = getSurveyResponses();
+    const allResponses = getSurveyResponses();
     let filtered = allResponses;
     if (surveyProjectId) {
       filtered = allResponses.filter((r: SurveyResponse) => r.surveyProjectId === surveyProjectId);

@@ -1,7 +1,6 @@
 import { IExecDataProtectorCore } from '@iexec/dataprotector';
 import JSZip from 'jszip';
 import type { Eip1193Provider } from 'ethers';
-import { ethers } from 'ethers';
 
 // This would come from environment variables in production
 const IEXEC_APP_ADDRESS = process.env.NEXT_PUBLIC_IEXEC_APP_ADDRESS || '0xF8e28d5776283b55455CECE9d1962AFd42113ABD';
@@ -59,9 +58,9 @@ export async function switchToBellecour() {
         });
         isSwitchingNetwork = false;
         return true;
-      } catch (switchErr: any) {
+      } catch (switchErr: unknown) {
         // 3. If the error is "unknown chain", try to add it
-        if (switchErr.code === 4902) {
+        if ((switchErr as { code?: number }).code === 4902) {
           await window.ethereum.request({
             method: 'wallet_addEthereumChain',
             params: [bellecourParams],
@@ -77,18 +76,18 @@ export async function switchToBellecour() {
         isSwitchingNetwork = false;
         throw switchErr;
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       isSwitchingNetwork = false;
-      if (err && err.code === -32002) {
+      if ((err as { code?: number }).code === -32002) {
         throw new Error(
           "A network request is already pending in MetaMask. Please check your MetaMask extension and approve or reject the pending request, then try again."
         );
       }
       if (
-        err &&
-        (err.message?.includes('p is not a function') ||
-         err.message?.includes('Unrecognized chain ID') ||
-         err.code === -32603)
+        (err as { message?: string; code?: number }) &&
+        ((err as { message?: string }).message?.includes('p is not a function') ||
+         (err as { message?: string }).message?.includes('Unrecognized chain ID') ||
+         (err as { code?: number }).code === -32603)
       ) {
         throw new Error(
           'MetaMask does not support the iExec Bellecour network by default. Please add it manually in your wallet:\n\n' +
@@ -158,7 +157,7 @@ export async function protectSurveyData(
       protectedDataAddress: protectedData.address,
       owner: protectedData.owner,
     };
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Error protecting survey data:', error);
     throw error;
   }

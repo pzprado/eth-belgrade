@@ -1,17 +1,11 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import { useState } from 'react';
 import { protectSurveyData } from '@/lib/iexec';
-import { useUser } from '@civic/auth-web3/react';
+// import { useUser } from '@civic/auth-web3/react'; // Remove unused
 import { Calendar, ShieldCheck, Clock } from 'lucide-react';
 
 // Add the global question set (normally imported from a shared config)
@@ -98,7 +92,7 @@ const initialAnswers = Object.fromEntries(
 const SURVEY_PROJECT_ID = 'sum_alpha';
 
 export function EmployeeSurveyContent() {
-  const { user } = useUser();
+  // const { user } = useUser(); // Remove if not used
   const [answers, setAnswers] = useState<{
     [key: string]: number | string | null;
   }>(initialAnswers);
@@ -192,9 +186,6 @@ export function EmployeeSurveyContent() {
       ))}
     </div>
   );
-
-  const firstName =
-    user?.name?.split(' ')[0] || user?.email?.split('@')[0] || 'Employee';
 
   return (
     <div className='w-full max-w-2xl flex flex-col gap-6'>

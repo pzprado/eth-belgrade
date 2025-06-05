@@ -1,95 +1,30 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import {
-  processProtectedData,
-  getResultFromCompletedTask,
-  AggregationReport,
-} from '@/lib/iexec';
-import path from 'path';
-import process from 'process';
-import { Smile, Meh, Frown, TrendingUp, Users, BarChart } from 'lucide-react';
-
-interface SurveyRecord {
-  protectedDataAddress: string;
-  owner: string;
-  timestamp: string;
-}
+import { Card, CardContent } from '@/components/ui/card';
+import { Smile, Meh, Frown } from 'lucide-react';
 
 const SURVEY_PROJECT_ID = 'sum_alpha'; // Hardcoded for hackathon scope
-const DATA_FILE = path.join(
-  process.cwd(),
-  'apps/frontend/src/lib/survey_responses.json'
-);
 
 export default function AdminPage() {
-  const [surveyData, setSurveyData] = useState<SurveyRecord[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-  const [aggStatus, setAggStatus] = useState<
-    'idle' | 'processing' | 'fetching' | 'done' | 'error'
-  >('idle');
-  const [aggError, setAggError] = useState<string | null>(null);
-  const [aggReport, setAggReport] = useState<AggregationReport | null>(null);
-
   useEffect(() => {
     async function fetchData() {
-      setLoading(true);
-      setError(null);
       try {
         const res = await fetch(
           `/api/getSurveyData?surveyProjectId=${SURVEY_PROJECT_ID}`
         );
         if (!res.ok) throw new Error('Failed to fetch survey data');
-        const data = await res.json();
-        setSurveyData(data.responses || []);
+        // const data = await res.json();
+        // setSurveyData(data.responses || []);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Error fetching data');
-      } finally {
-        setLoading(false);
+        console.error(
+          err instanceof Error ? err.message : 'Error fetching data'
+        );
       }
     }
     fetchData();
   }, []);
-
-  const handleAggregate = async () => {
-    setAggStatus('processing');
-    setAggError(null);
-    setAggReport(null);
-    try {
-      const addresses = surveyData.map((rec) => rec.protectedDataAddress);
-      if (addresses.length === 0)
-        throw new Error('No survey data to aggregate');
-      const results = await processProtectedData({
-        protectedDataAddresses: addresses,
-      });
-      if (!results.length) throw new Error('No iExec task started');
-      const { taskId } = results[0];
-      setAggStatus('fetching');
-      let report: AggregationReport | null = null;
-      let attempts = 0;
-      while (attempts < 20) {
-        try {
-          report = await getResultFromCompletedTask(taskId);
-          break;
-        } catch {
-          await new Promise((res) => setTimeout(res, 5000));
-        }
-        attempts++;
-      }
-      if (!report)
-        throw new Error(
-          'Aggregation result not available yet. Try again later.'
-        );
-      setAggReport(report);
-      setAggStatus('done');
-    } catch (err) {
-      setAggError(err instanceof Error ? err.message : 'Aggregation failed');
-      setAggStatus('error');
-    }
-  };
 
   return (
     <div className='flex min-h-screen bg-slate-50'>
