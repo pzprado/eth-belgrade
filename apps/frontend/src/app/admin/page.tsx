@@ -232,20 +232,140 @@ export default function AdminPage() {
                 <div className='w-full text-left text-slate-500 text-xs mb-2'>
                   Score over time
                 </div>
-                <div className='flex flex-col items-center justify-center flex-1 w-full'>
-                  <span className='text-xs text-slate-500 mb-2'>
-                    No change since 2 Jan
-                  </span>
-                  <div className='h-10 flex items-center justify-center'>
-                    <svg width='80' height='24'>
-                      <polyline
-                        points='0,18 16,16 32,16 48,16 64,16 80,16'
-                        fill='none'
-                        stroke='#94a3b8'
-                        strokeWidth='2'
-                      />
-                    </svg>
-                  </div>
+                <div className='flex-1 w-full flex items-end'>
+                  <svg
+                    viewBox='0 0 160 100'
+                    width='100%'
+                    height='100%'
+                    className='w-full h-full'
+                    preserveAspectRatio='none'
+                    fill='none'
+                  >
+                    <defs>
+                      <linearGradient
+                        id='scoreArea'
+                        x1='0'
+                        y1='0'
+                        x2='0'
+                        y2='1'
+                      >
+                        <stop
+                          offset='0%'
+                          stopColor='#2563eb'
+                          stopOpacity='0.18'
+                        />
+                        <stop
+                          offset='100%'
+                          stopColor='#2563eb'
+                          stopOpacity='0.03'
+                        />
+                      </linearGradient>
+                      <filter
+                        id='shadow'
+                        x='-10%'
+                        y='-10%'
+                        width='120%'
+                        height='120%'
+                      >
+                        <feDropShadow
+                          dx='0'
+                          dy='2'
+                          stdDeviation='2'
+                          floodColor='#2563eb'
+                          floodOpacity='0.10'
+                        />
+                      </filter>
+                    </defs>
+                    {/* Grid lines */}
+                    <line
+                      x1='0'
+                      y1='90'
+                      x2='160'
+                      y2='90'
+                      stroke='#e5e7eb'
+                      strokeWidth='0.7'
+                    />
+                    <line
+                      x1='0'
+                      y1='60'
+                      x2='160'
+                      y2='60'
+                      stroke='#e5e7eb'
+                      strokeWidth='0.7'
+                    />
+                    <line
+                      x1='0'
+                      y1='30'
+                      x2='160'
+                      y2='30'
+                      stroke='#e5e7eb'
+                      strokeWidth='0.7'
+                    />
+                    {/* Y axis */}
+                    <line
+                      x1='20'
+                      y1='10'
+                      x2='20'
+                      y2='90'
+                      stroke='#e5e7eb'
+                      strokeWidth='0.7'
+                    />
+                    {/* Area under line */}
+                    <path
+                      d='M20,80 C40,65 60,60 80,70 C100,80 120,40 140,50 L140,100 L20,100 Z'
+                      fill='url(#scoreArea)'
+                    />
+                    {/* Smooth line */}
+                    <path
+                      d='M20,80 C40,65 60,60 80,70 C100,80 120,40 140,50'
+                      stroke='#2563eb'
+                      strokeWidth='2.5'
+                      fill='none'
+                      filter='url(#shadow)'
+                      strokeLinecap='round'
+                    />
+                    {/* Data points */}
+                    <circle
+                      cx='20'
+                      cy='80'
+                      r='2.5'
+                      fill='#2563eb'
+                      stroke='white'
+                      strokeWidth='1.2'
+                    />
+                    <circle
+                      cx='50'
+                      cy='67'
+                      r='2.5'
+                      fill='#2563eb'
+                      stroke='white'
+                      strokeWidth='1.2'
+                    />
+                    <circle
+                      cx='80'
+                      cy='70'
+                      r='2.5'
+                      fill='#2563eb'
+                      stroke='white'
+                      strokeWidth='1.2'
+                    />
+                    <circle
+                      cx='110'
+                      cy='50'
+                      r='2.5'
+                      fill='#2563eb'
+                      stroke='white'
+                      strokeWidth='1.2'
+                    />
+                    <circle
+                      cx='140'
+                      cy='50'
+                      r='2.5'
+                      fill='#2563eb'
+                      stroke='white'
+                      strokeWidth='1.2'
+                    />
+                  </svg>
                 </div>
               </CardContent>
             </Card>
