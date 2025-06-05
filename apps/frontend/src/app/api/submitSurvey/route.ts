@@ -1,24 +1,12 @@
 import { NextResponse } from 'next/server';
-
-interface SurveyResponse {
-  protectedDataAddress: string;
-  owner: string;
-  surveyProjectId?: string;
-  submissionTimestampClient?: string;
-  apiReceivedTimestamp?: string;
-  timestamp?: string;
-}
-
-// Temporary in-memory storage for demo purposes
-// In production, this would be a proper database
-const surveyResponses: SurveyResponse[] = [];
+import { addSurveyResponse, SurveyResponse } from '@/lib/surveyStore';
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
     
     // Validate required fields
-    if (!body.protectedDataAddress || !body.owner) {
+    if (!body.protectedDataAddress || !body.owner || !body.surveyProjectId) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
@@ -26,7 +14,7 @@ export async function POST(request: Request) {
     }
 
     // Store the encrypted survey data reference
-    surveyResponses.push({
+    addSurveyResponse({
       protectedDataAddress: body.protectedDataAddress,
       owner: body.owner,
       surveyProjectId: body.surveyProjectId,

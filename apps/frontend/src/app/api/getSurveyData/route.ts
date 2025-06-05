@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { getSurveyResponses, SurveyResponse } from '@/lib/surveyStore';
 
 interface SurveyResponse {
   protectedDataAddress: string;
@@ -8,17 +9,17 @@ interface SurveyResponse {
   apiReceivedTimestamp?: string;
 }
 
-// This would normally be imported from a shared location
-// but for demo we're keeping it simple
-const surveyResponses: SurveyResponse[] = [];
-
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const surveyProjectId = searchParams.get('surveyProjectId');
+    let allResponses = getSurveyResponses();
+    let filtered = allResponses;
+    if (surveyProjectId) {
+      filtered = allResponses.filter((r: SurveyResponse) => r.surveyProjectId === surveyProjectId);
+    }
     return NextResponse.json(
-      { 
-        responses: surveyResponses,
-        count: surveyResponses.length 
-      },
+      { responses: filtered, count: filtered.length },
       { status: 200 }
     );
   } catch (error) {

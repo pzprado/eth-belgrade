@@ -95,6 +95,8 @@ const initialAnswers = Object.fromEntries(
   SUM_GLOBAL_QUESTIONS.map((q) => [q.questionId, q.type === 'text' ? '' : null])
 );
 
+const SURVEY_PROJECT_ID = 'sum_alpha';
+
 export function EmployeeSurveyContent() {
   const { user } = useUser();
   const [answers, setAnswers] = useState<{
@@ -136,7 +138,6 @@ export function EmployeeSurveyContent() {
     }
     setIsSubmitting(true);
     try {
-      // Build responses array
       const responses = SUM_GLOBAL_QUESTIONS.map((q) => ({
         questionId: q.questionId,
         answerValue: answers[q.questionId],
@@ -145,7 +146,10 @@ export function EmployeeSurveyContent() {
       const res = await fetch('/api/submitSurvey', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(protectedData),
+        body: JSON.stringify({
+          ...protectedData,
+          surveyProjectId: SURVEY_PROJECT_ID,
+        }),
       });
       if (!res.ok) {
         const data = await res.json();
@@ -203,6 +207,9 @@ export function EmployeeSurveyContent() {
               <span className='text-slate-600 text-sm'>
                 Your feedback helps us create a better workplace. This survey is
                 encrypted, anonymous and takes about 5 minutes to complete.
+              </span>
+              <span className='text-xs text-blue-700 mt-2'>
+                Active Project ID: <b>{SURVEY_PROJECT_ID}</b>
               </span>
             </div>
             <span className='bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full'>

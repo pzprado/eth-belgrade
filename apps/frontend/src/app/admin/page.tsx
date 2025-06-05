@@ -8,6 +8,8 @@ import {
   getResultFromCompletedTask,
   AggregationReport,
 } from '@/lib/iexec';
+import path from 'path';
+import process from 'process';
 
 interface SurveyRecord {
   protectedDataAddress: string;
@@ -15,7 +17,11 @@ interface SurveyRecord {
   timestamp: string;
 }
 
-const SURVEY_PROJECT_ID = 'demo_project'; // Hardcoded for hackathon scope
+const SURVEY_PROJECT_ID = 'sum_alpha'; // Hardcoded for hackathon scope
+const DATA_FILE = path.join(
+  process.cwd(),
+  'apps/frontend/src/lib/survey_responses.json'
+);
 
 export default function AdminPage() {
   const [surveyData, setSurveyData] = useState<SurveyRecord[]>([]);

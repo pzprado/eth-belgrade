@@ -7,7 +7,7 @@ fi
 
 IAPP_ADDRESS="$1"
 
-echo "Running test job with mock-surveys.json on TDX workerpool..."
+echo "Running app on TDX workerpool..."
 EXPERIMENTAL_TDX_APP=true iapp run $IAPP_ADDRESS
 
 echo "Done. Use 'iapp debug <taskId>' to check logs and results."
